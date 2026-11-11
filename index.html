@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DevBlog — Платформа публікацій</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-container">
+      <div class="logo">
+        <h1>DevBlog<span>.local</span></h1>
+      </div>
+      <nav class="theme-nav">
+        <button type="button" id="theme-toggle-btn" class="btn btn-secondary">
+          <span id="theme-icon">🌙</span> Тема
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="main-layout">
+    <!-- Секція форми створення та редагування статті -->
+    <section class="editor-section">
+      <div class="card">
+        <div class="editor-header">
+          <h2 id="form-heading">Створити публікацію</h2>
+          <button type="button" id="cancel-edit-btn" class="btn btn-sm btn-ghost hidden">Скасувати</button>
+        </div>
+
+        <form id="article-form" novalidate>
+          <input type="hidden" id="edit-article-id" value="">
+
+          <div class="form-group">
+            <label for="article-title">Заголовок статті:</label>
+            <input 
+              type="text" 
+              id="article-title" 
+              placeholder="Наприклад: Вступ до асинхронного JS" 
+              autocomplete="off"
+            >
+            <span class="error-message" id="title-error"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="article-tags">Теги (через кому або пробіл):</label>
+            <input 
+              type="text" 
+              id="article-tags" 
+              placeholder="javascript, web, frontend" 
+              autocomplete="off"
+            >
+            <span class="error-message" id="tags-error"></span>
+          </div>
+
+          <div class="form-group">
+            <div class="label-row">
+              <label for="article-content">Вміст (Markdown):</label>
+              <span id="content-char-counter" class="char-counter">0 / 3000</span>
+            </div>
+            <textarea 
+              id="article-content" 
+              rows="9" 
+              placeholder="Використовуйте #, ##, **жирний**, *курсив*, [текст](посилання)"
+            ></textarea>
+            <span class="error-message" id="content-error"></span>
+          </div>
+
+          <!-- Попередній перегляд Markdown -->
+          <div class="preview-wrapper">
+            <span class="preview-badge">Live Markdown Preview</span>
+            <div id="live-preview" class="markdown-preview"></div>
+          </div>
+
+          <button type="submit" id="submit-btn" class="btn btn-primary">Опублікувати</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Пошук, фільтри та стрічки публікацій -->
+    <section class="feed-section">
+      <div class="controls-card">
+        <div class="search-box">
+          <label for="search-input" class="sr-only">Пошук за заголовком</label>
+          <input type="text" id="search-input" placeholder="🔍 Пошук статей за назвою...">
+        </div>
+        <div class="filter-box">
+          <label for="tag-filter-select">Фільтр за тегом:</label>
+          <select id="tag-filter-select">
+            <option value="">Усі теги</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="feed-header">
+        <h2>Стрічка публікацій (<span id="articles-count">0</span>)</h2>
+      </div>
+
+      <div id="articles-container" class="articles-grid">
+        <!-- Картки генеруються динамічно засобами DOM -->
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 Кафедра АПОТ, ХНУРЕ. Лабораторна робота №1 з ТВР.</p>
+  </footer>
+
+  <script src="models.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
